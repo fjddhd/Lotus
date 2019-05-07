@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="跟未来多多说点东西嘛安安安"
+        android:id="@+id/ed_duoduo"
+        android:maxLength="4"
+        android:maxLines="1"
+        android:layout_marginBottom="0dp"/>
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="选择一个未来多多（1-1024）"
+        android:inputType="number"
+        android:id="@+id/ed_anan"
+        android:maxLength="4"
+        android:maxLines="1"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="25dp"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bt_shape"
+        android:text="现在就告诉未来多多"
+        android:textColor="#fff"
+        android:id="@+id/btn_main"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:id="@+id/tv_main"/>
+
+</LinearLayout>
