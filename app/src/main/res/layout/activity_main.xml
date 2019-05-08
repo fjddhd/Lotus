@@ -13,8 +13,9 @@
         android:layout_height="wrap_content"
         android:hint="跟未来多多说点东西嘛安安安"
         android:id="@+id/ed_duoduo"
-        android:maxLength="4"
+        android:maxLength="8"
         android:maxLines="1"
+        android:inputType="text"
         android:layout_marginBottom="0dp"/>
     <EditText
         android:layout_width="wrap_content"

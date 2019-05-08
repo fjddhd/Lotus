@@ -1,6 +1,7 @@
 package com.duoduo.lotus;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Message;
@@ -24,12 +25,16 @@ public class MainActivity extends AppCompatActivity {
     private TextView tv;
     private ArrayList<Integer> al;
     private EditText ed2;
+    private int knockBackdoor;
+    private boolean OpenBackdoor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         FVBid();
+        knockBackdoor = 0;
+        OpenBackdoor=false;
 
         btn.setOnClickListener(new View.OnClickListener() {
 
@@ -47,9 +52,23 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (knockBackdoor>=5){
+                    OpenBackdoor=true;
+                }
+                knockBackdoor++;
+            }
+        });
         tv.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
+                if (OpenBackdoor){
+                    OpenBackdoor=false;
+                    startActivity(new Intent(MainActivity.this,BackDoorActivity.class));
+                    return false;
+                }
                 tv.setText("");
                 Toast.makeText(MainActivity.this,"哎气气，安安把未来多多重置了呢",
                         Toast.LENGTH_SHORT).show();
@@ -57,6 +76,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        OpenBackdoor=false;
+        knockBackdoor=0;//重置后门
     }
 
     public static final int PUSH_SUCCEED = 2;
