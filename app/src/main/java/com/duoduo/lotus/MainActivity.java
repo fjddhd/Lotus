@@ -2,23 +2,24 @@ package com.duoduo.lotus;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Vibrator;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
+import com.duoduo.lotus.Connection.HttpCon;
+import com.duoduo.lotus.Utils.Mysp;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class MainActivity extends BaseActivity {
 
     private EditText ed;
     private Button btn;
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        InitToolbar(R.id.tool_bar_main,"安安的未来多多",false);
         FVBid();
         knockBackdoor = 0;
         OpenBackdoor=false;
@@ -45,7 +47,8 @@ public class MainActivity extends AppCompatActivity {
 
                 //180.76.185.86
                 StringBuilder sb=new StringBuilder();
-                sb.append("http://180.76.185.86/duoduoanan?s1=");
+                Mysp mysp=new Mysp(MainActivity.this,"connection");
+                sb.append("http://"+mysp.getString("server")+"/duoduoanan?s1=");
                 sb.append(s1+"&s2=");
                 sb.append(s2);
                 HttpCon.createPostString("",sb.toString(),handler);
@@ -134,5 +137,22 @@ public class MainActivity extends AppCompatActivity {
         ed2 = findViewById(R.id.ed_anan);
         btn = findViewById(R.id.btn_main);
         tv = findViewById(R.id.tv_main);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu,menu);//启用菜单
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_setting:
+                Intent i = new Intent(MainActivity.this, SettingPage.class);
+                startActivity(i);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

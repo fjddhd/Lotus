@@ -1,4 +1,4 @@
-package com.duoduo.lotus;
+package com.duoduo.lotus.Connection;
 
 import android.os.Handler;
 import android.os.Message;

@@ -7,14 +7,14 @@ import java.util.List;
 
 /**
  * Created by duoduo 2019/5/8
- * 每个实例维持一个私有SharedPreferences对象
- * 该私有SharedPreferences对象通过构造函数生成
+ * 每个实例维持一个SharedPreferences对象
+ * 该私有SharedPreferences对象通过构造函数生成(如果已经生成过则获取)
  * 一个sp：（sp名，众多键值对）
  * */
 public class Mysp {
-    private SharedPreferences sp;
+    public SharedPreferences sp;
     private String sp_name;
-    public void Mysp(Context context,String SharedPreferencesName){
+    public Mysp(Context context,String SharedPreferencesName){
         sp=context.getSharedPreferences(SharedPreferencesName,Context.MODE_PRIVATE);
         sp_name=SharedPreferencesName;
     }
