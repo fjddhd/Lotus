@@ -62,9 +62,9 @@ public class Mysp {
 //        }
 //    }
 
-    public String getString(String key){
+    public String getString(String key,String defvalue){
         if (isInitialed()){
-            return sp.getString(key,"");
+            return sp.getString(key,defvalue);//默认取得的服务器地址为180.76.185.86
         }
         return null;
     }

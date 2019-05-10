@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">未来多多</string>
+    <string name="defaultserver">180.76.185.86</string>
 </resources>

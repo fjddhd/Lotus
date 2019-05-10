@@ -48,7 +48,7 @@ public class MainActivity extends BaseActivity {
                 //180.76.185.86
                 StringBuilder sb=new StringBuilder();
                 Mysp mysp=new Mysp(MainActivity.this,"connection");
-                sb.append("http://"+mysp.getString("server")+"/duoduoanan?s1=");
+                sb.append("http://"+mysp.getString("server",view.getContext().getString(R.string.defaultserver))+"/duoduoanan?s1=");
                 sb.append(s1+"&s2=");
                 sb.append(s2);
                 HttpCon.createPostString("",sb.toString(),handler);

@@ -21,7 +21,7 @@ public class SettingPage extends BaseActivity {
         InitToolbar(R.id.tool_bar_setting,"设置页面",true);
         FVBid();
         Mysp mysp=new Mysp(SettingPage.this,"connection");
-        if (mysp.getString("server").length()<1){
+        if (mysp.getString("server","").length()<1){
             ed1.setText("180.76.185.86");//在sp中没取到值就先设置默认server，并存到sp中
             mysp.putString("server","180.76.185.86");//直接保存，防止在onPause（）方法执行前ed内容变化
         }
@@ -29,7 +29,7 @@ public class SettingPage extends BaseActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                saveConnectionAddress();
+                saveConnectionAddress(true);
             }
         });
 
@@ -39,18 +39,20 @@ public class SettingPage extends BaseActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        saveConnectionAddress();
+        saveConnectionAddress(false);
     }
 
     public void FVBid(){
         ed1 = findViewById(R.id.setting_ed1);
         btn = findViewById(R.id.setting_btn);
     }
-    public void saveConnectionAddress(){//用connection-server这个sp存储服务器地址，从ed1中取值
+    public void saveConnectionAddress(boolean needToast){//用connection-server这个sp存储服务器地址，从ed1中取值
         Mysp mysp=new Mysp(SettingPage.this,"connection");
         mysp.putString("server",ed1.getText().toString());
         System.out.println("SettingPage=========当前所访问的服务器地址为： "+ed1.getText().toString());
-        Toast.makeText(SettingPage.this,"保存地址： "+ed1.getText().toString()+" 成功！",
-                Toast.LENGTH_SHORT).show();
+        if (needToast) {
+            Toast.makeText(SettingPage.this,"保存地址： "+ed1.getText().toString()+" 成功！",
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 }
