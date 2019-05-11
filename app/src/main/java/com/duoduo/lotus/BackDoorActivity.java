@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +21,8 @@ public class BackDoorActivity extends BaseActivity {
     private Button btn_get;
     private ListView lv;
     private Button btn_deleteAll;
+    private Button btn_commitChoujiang;
+    private EditText ed_choujiangFail;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,11 +51,28 @@ public class BackDoorActivity extends BaseActivity {
             }
         });
 
+        btn_commitChoujiang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (ed_choujiangFail.getText().toString().length()<1){
+                    Toast.makeText(BackDoorActivity.this,
+                            "要设置未抽到比例才能提交准许抽奖请求",Toast.LENGTH_SHORT).show();
+                }else {
+                    //发送带参数请求到@server/duoduoanansetchoujiang
+
+                }
+            }
+        });
+
+
+
     }
     private void FVBid(){
         lv = findViewById(R.id.back_lv);//注意，lv外面一定不要嵌套scrollview
         btn_get = findViewById(R.id.back_btn_get);
         btn_deleteAll = findViewById(R.id.back_btn_deleteall);
+        btn_commitChoujiang = findViewById(R.id.back_btn_commitChoujiang);
+        ed_choujiangFail = findViewById(R.id.back_ed_weichoudao);
     }
     public void getServerMessage(){//获取服务器信息并在成功后handler会重新初始化lv并刷新
         //180.76.185.86

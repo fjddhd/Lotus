@@ -18,16 +18,21 @@ import com.duoduo.lotus.Connection.HttpCon;
 import com.duoduo.lotus.Utils.Mysp;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.TimeZone;
 
 public class MainActivity extends BaseActivity {
 
     private EditText ed;
-    private Button btn;
+    private Button btn_wantSend;
     private TextView tv;
     private ArrayList<Integer> al;
     private EditText ed2;
     private int knockBackdoor;
     private boolean OpenBackdoor;
+    private Calendar cal;
+    private Button btn_choujiang;
+    private Button btn_wantChoujiang;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +43,7 @@ public class MainActivity extends BaseActivity {
         knockBackdoor = 0;
         OpenBackdoor=false;
 
-        btn.setOnClickListener(new View.OnClickListener() {
+        btn_wantSend.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
@@ -48,10 +53,13 @@ public class MainActivity extends BaseActivity {
                 //180.76.185.86
                 StringBuilder sb=new StringBuilder();
                 Mysp mysp=new Mysp(MainActivity.this,"connection");
-                sb.append("http://"+mysp.getString("server",view.getContext().getString(R.string.defaultserver))+"/duoduoanan?s1=");
+                sb.append("http://"+mysp.getString("server",
+                        view.getContext().getString(R.string.defaultserver))+"/duoduoanan?s1=");//涉及到第一次启动，从String文件中取默认服务器地址
                 sb.append(s1+"&s2=");
                 sb.append(s2);
                 HttpCon.createPostString("",sb.toString(),handler);
+
+                System.out.println(getMonyhandDay());
 
             }
         });
@@ -79,6 +87,18 @@ public class MainActivity extends BaseActivity {
             }
         });
 
+        btn_wantChoujiang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                StringBuilder sb=new StringBuilder();
+                Mysp mysp=new Mysp(MainActivity.this,"connection");
+                sb.append("http://"+mysp.getString("server",
+                        view.getContext().getString(R.string.defaultserver))+"/duoduoananwantchoujiang?s1=");
+                sb.append(getMonyhandDay());
+                HttpCon.createChoujiangAuth("",sb.toString(),handler);
+            }
+        });
+
     }
 
     @Override
@@ -90,6 +110,8 @@ public class MainActivity extends BaseActivity {
 
     public static final int PUSH_SUCCEED = 2;
     public static final int PUSH_FAILED = 3;
+    public static final int CHECK_AUTH_SUCCESS = 8;
+    public static final int CHECK_AUTH_FAILED = 9;
     @SuppressLint("HandlerLeak")
     protected Handler handler=new Handler(){
         @Override
@@ -98,8 +120,9 @@ public class MainActivity extends BaseActivity {
             switch (msg.what){
                 case PUSH_SUCCEED:
                     String s= msg.obj.toString();
-                    if (s.length()>100){
-                        Toast.makeText(MainActivity.this,"未来多多现在不在呐，安安安",Toast.LENGTH_SHORT).show();
+                    if (s.length()>100){//返回值长度大于100也表示没成功
+                        Toast.makeText(MainActivity.this,
+                                "未来多多现在不在呐，安安安",Toast.LENGTH_SHORT).show();
                         break;
                     }
                     if (s.equals("哎，暗号号！震动一下惩罚安安安")){
@@ -109,8 +132,29 @@ public class MainActivity extends BaseActivity {
                     tv.setText(s);
                     break;
                 case PUSH_FAILED:
-                    Toast.makeText(MainActivity.this,"未来多多现在不在呐，安安安",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this,
+                            "未来多多现在不在呐，安安安",Toast.LENGTH_SHORT).show();
                     break;
+                case CHECK_AUTH_SUCCESS:
+                    String s_check= msg.obj.toString();
+                    System.out.println("抽奖资格：YesOrNo： "+s_check);
+                    if (s_check.equals("no")){
+                        Toast.makeText(MainActivity.this,
+                                "现在还不给抽奖呐安安安，快去向现在多多申请嘛",Toast.LENGTH_SHORT).show();
+                    }else if (s_check.equals("yes")){
+                        //允许抽奖，重叠按钮切换为抽奖按钮
+                        btn_wantChoujiang.setVisibility(View.GONE);
+                        btn_choujiang.setVisibility(View.VISIBLE);
+                    }else {
+                        Toast.makeText(MainActivity.this,
+                                "没有成功获取到抽奖认证信息呢，安安安",Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+                case CHECK_AUTH_FAILED:
+                    Toast.makeText(MainActivity.this,
+                            "未来多多现在不在呐，安安安",Toast.LENGTH_SHORT).show();
+                    break;
+
             }
 
         }
@@ -135,8 +179,10 @@ public class MainActivity extends BaseActivity {
     public void FVBid(){
         ed = findViewById(R.id.ed_duoduo);
         ed2 = findViewById(R.id.ed_anan);
-        btn = findViewById(R.id.btn_main);
+        btn_wantSend = findViewById(R.id.btn_main);
         tv = findViewById(R.id.tv_main);
+        btn_wantChoujiang = findViewById(R.id.btn_wantchoujiang);
+        btn_choujiang = findViewById(R.id.btn_choujiang);
     }
 
     @Override
@@ -154,5 +200,16 @@ public class MainActivity extends BaseActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public String getMonyhandDay(){
+        cal = Calendar.getInstance();
+        cal.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
+        String month = String.valueOf(cal.get(Calendar.MONTH)+1);
+        String day = String.valueOf(cal.get(Calendar.DATE));
+        month=month.length()<2?"0"+month:month;
+        day=day.length()<2?"0"+day:day;
+
+        return month+day;
     }
 }

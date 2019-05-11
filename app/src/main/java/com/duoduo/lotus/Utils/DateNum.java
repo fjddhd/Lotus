@@ -2,7 +2,7 @@ package com.duoduo.lotus.Utils;
 
 import java.util.Date;
 
-public class DateNum {
+public class DateNum {//有官方date的api所以暂时弃用该类
     public static int getHour(){
         String date=new Date().toLocaleString();
         System.out.println(date);

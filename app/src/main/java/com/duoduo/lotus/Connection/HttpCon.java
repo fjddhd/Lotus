@@ -24,6 +24,8 @@ public class HttpCon {
     public static final int GET_FAILED = 5;
     public static final int Delete_SUCCEED = 6;
     public static final int Delete_FAILED = 7;
+    public static final int CHECK_AUTH_SUCCESS = 8;
+    public static final int CHECK_AUTH_FAILED = 9;
     public static void createPostString(String requestBody, String url, final Handler handler){//post请求需要requestBody
         OkHttpClient okHttpClient = new OkHttpClient();
         final Request request = new Request.Builder()
@@ -113,6 +115,37 @@ public class HttpCon {
                 Message message = new Message();
                 message.obj=response.body().string();
                 message.what =Delete_SUCCEED;
+                handler.sendMessage(message);
+            }
+        });
+    }
+    public static void createChoujiangAuth(String requestBody, String url, final Handler handler){//post请求需要requestBody
+        OkHttpClient okHttpClient = new OkHttpClient();
+        final Request request = new Request.Builder()
+                .url(url)
+                .get()//默认就是GET请求，可以不写
+                .build();
+        Call call = okHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.d(TAG, "onFailure: " + e.getMessage());
+                System.out.println("请求抽奖资格失败");
+
+                Message message = new Message();
+                message.what =CHECK_AUTH_FAILED;
+                handler.sendMessage(message);
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                System.out.println("请求抽奖资格成功");
+//                System.out.println(response.body().string());
+
+
+                Message message = new Message();
+                message.obj=response.body().string();
+                message.what =CHECK_AUTH_SUCCESS;
                 handler.sendMessage(message);
             }
         });

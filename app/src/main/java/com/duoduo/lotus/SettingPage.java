@@ -22,8 +22,10 @@ public class SettingPage extends BaseActivity {
         FVBid();
         Mysp mysp=new Mysp(SettingPage.this,"connection");
         if (mysp.getString("server","").length()<1){
-            ed1.setText("180.76.185.86");//在sp中没取到值就先设置默认server，并存到sp中
-            mysp.putString("server","180.76.185.86");//直接保存，防止在onPause（）方法执行前ed内容变化
+            ed1.setText(this.getString(R.string.defaultserver));//在sp中没取到值就先设置默认server，并存到sp中
+            mysp.putString("server",this.getString(R.string.defaultserver));//直接保存，防止在onPause（）方法执行前ed内容变化
+        }else {
+            ed1.setText(mysp.getString("server",""));
         }
 
         btn.setOnClickListener(new View.OnClickListener() {
