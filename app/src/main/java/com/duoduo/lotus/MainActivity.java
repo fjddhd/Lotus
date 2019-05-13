@@ -19,6 +19,7 @@ import com.duoduo.lotus.Utils.Mysp;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.TimeZone;
 
 public class MainActivity extends BaseActivity {
@@ -57,6 +58,8 @@ public class MainActivity extends BaseActivity {
                         view.getContext().getString(R.string.defaultserver))+"/duoduoanan?s1=");//涉及到第一次启动，从String文件中取默认服务器地址
                 sb.append(s1+"&s2=");
                 sb.append(s2);
+                //发送时间--测试用
+                sb.append("&sendTime="+(new Date().toLocaleString()));
                 HttpCon.createPostString("",sb.toString(),handler);
 
                 System.out.println(getMonyhandDay());
@@ -66,7 +69,7 @@ public class MainActivity extends BaseActivity {
         tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (knockBackdoor>=5){
+                if (knockBackdoor>=10){
                     OpenBackdoor=true;
                 }
                 knockBackdoor++;
@@ -99,6 +102,20 @@ public class MainActivity extends BaseActivity {
             }
         });
 
+        btn_choujiang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //发送抽奖请求到/duoduoananchoujiang
+                //handler响应成功必须重置重叠按钮显示
+                StringBuilder sb=new StringBuilder();
+                Mysp mysp=new Mysp(MainActivity.this,"connection");
+                sb.append("http://"+mysp.getString("server",
+                        view.getContext().getString(R.string.defaultserver))+"/duoduoananchoujiang");
+                HttpCon.createChoujiang("",sb.toString(),handler);
+
+            }
+        });
+
     }
 
     @Override
@@ -112,6 +129,8 @@ public class MainActivity extends BaseActivity {
     public static final int PUSH_FAILED = 3;
     public static final int CHECK_AUTH_SUCCESS = 8;
     public static final int CHECK_AUTH_FAILED = 9;
+    public static final int CHOUJIANG_SUCCESS = 12;
+    public static final int CHOUJIANG_FAILED = 13;
     @SuppressLint("HandlerLeak")
     protected Handler handler=new Handler(){
         @Override
@@ -151,6 +170,16 @@ public class MainActivity extends BaseActivity {
                     }
                     break;
                 case CHECK_AUTH_FAILED:
+                    Toast.makeText(MainActivity.this,
+                            "未来多多现在不在呐，安安安",Toast.LENGTH_SHORT).show();
+                    break;
+                case CHOUJIANG_SUCCESS:
+                    tv.setText("抽奖结果是： "+msg.obj.toString()+"  截图给多多才有效哦安安安~");
+                    //重叠按钮重置
+                    btn_choujiang.setVisibility(View.GONE);
+                    btn_wantChoujiang.setVisibility(View.VISIBLE);
+                    break;
+                case CHOUJIANG_FAILED:
                     Toast.makeText(MainActivity.this,
                             "未来多多现在不在呐，安安安",Toast.LENGTH_SHORT).show();
                     break;
@@ -197,6 +226,10 @@ public class MainActivity extends BaseActivity {
             case R.id.menu_setting:
                 Intent i = new Intent(MainActivity.this, SettingPage.class);
                 startActivity(i);
+                break;
+            case R.id.menu_back:
+                Intent j = new Intent(MainActivity.this, SecurityPage.class);
+                startActivity(j);
                 break;
         }
         return super.onOptionsItemSelected(item);

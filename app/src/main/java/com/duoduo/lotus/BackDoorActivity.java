@@ -23,6 +23,7 @@ public class BackDoorActivity extends BaseActivity {
     private Button btn_deleteAll;
     private Button btn_commitChoujiang;
     private EditText ed_choujiangFail;
+    private EditText ed_choujiang;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,11 +55,18 @@ public class BackDoorActivity extends BaseActivity {
         btn_commitChoujiang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (ed_choujiangFail.getText().toString().length()<1){
+                if (ed_choujiangFail.getText().toString().length()<1 ||ed_choujiang.getText().toString().length()<1){
                     Toast.makeText(BackDoorActivity.this,
-                            "要设置未抽到比例才能提交准许抽奖请求",Toast.LENGTH_SHORT).show();
+                            "要填全所有信息才能提交准许抽奖请求",Toast.LENGTH_SHORT).show();
                 }else {
-                    //发送带参数请求到@server/duoduoanansetchoujiang
+                    //发送带参数请求到@server/duoduoanansetchoujiang用于设置抽奖权限
+                    String s1=ed_choujiangFail.getText().toString();
+                    String s2=ed_choujiang.getText().toString();
+                    Mysp sp=new Mysp(BackDoorActivity.this,"connection");
+                    String url="http://"+sp.getString("server",
+                            view.getContext().getString(R.string.defaultserver))+
+                            "/duoduoanansetchoujiang?s1="+s1+"&s2="+s2;
+                    HttpCon.createSetChoujiang("",url,handler);
 
                 }
             }
@@ -73,6 +81,7 @@ public class BackDoorActivity extends BaseActivity {
         btn_deleteAll = findViewById(R.id.back_btn_deleteall);
         btn_commitChoujiang = findViewById(R.id.back_btn_commitChoujiang);
         ed_choujiangFail = findViewById(R.id.back_ed_weichoudao);
+        ed_choujiang = findViewById(R.id.back_ed_setchoudao);
     }
     public void getServerMessage(){//获取服务器信息并在成功后handler会重新初始化lv并刷新
         //180.76.185.86
@@ -102,6 +111,8 @@ public class BackDoorActivity extends BaseActivity {
     public static final int GET_FAILED = 5;
     public static final int Delete_SUCCEED = 6;
     public static final int Delete_FAILED = 7;
+    public static final int SET_CHOUJIANG_SUCCESS = 10;
+    public static final int SET_CHOUJIANG_FAILED = 11;
     protected Handler handler=new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -126,6 +137,15 @@ public class BackDoorActivity extends BaseActivity {
 
                 case Delete_SUCCEED:
                     getServerMessage();//无论怎么删除后都要重新从服务器获取信息并刷新lv
+                    break;
+
+                case SET_CHOUJIANG_SUCCESS:
+                    Toast.makeText(BackDoorActivity.this,
+                            "设置抽奖成功",Toast.LENGTH_SHORT).show();
+                    break;
+                case SET_CHOUJIANG_FAILED:
+                    Toast.makeText(BackDoorActivity.this,
+                            "设置抽奖失败",Toast.LENGTH_SHORT).show();
                     break;
             }
 
