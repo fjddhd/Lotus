@@ -24,6 +24,9 @@ public class BackDoorActivity extends BaseActivity {
     private Button btn_commitChoujiang;
     private EditText ed_choujiangFail;
     private EditText ed_choujiang;
+    private EditText ed_setanhao;
+    private EditText ed_setanhaocontent;
+    private Button btn_sendanhao;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -72,6 +75,27 @@ public class BackDoorActivity extends BaseActivity {
             }
         });
 
+        //发送设置暗号请求
+        btn_sendanhao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (ed_setanhao.getText().toString().length()<1 ||ed_setanhaocontent.getText().toString().length()<1){
+                    Toast.makeText(BackDoorActivity.this,
+                            "要填全所有信息才能提交设置暗号请求",Toast.LENGTH_SHORT).show();
+                }else {
+                    //发送带参数请求到@server/setanhao
+                    String s1=ed_setanhao.getText().toString();
+                    String s2=ed_setanhaocontent.getText().toString();
+                    Mysp sp=new Mysp(BackDoorActivity.this,"connection");
+                    String url="http://"+sp.getString("server",
+                            view.getContext().getString(R.string.defaultserver))+
+                            "/setanhao?anhao="+s1+"&anhaocontent="+s2;
+                    HttpCon.createSendAnhao("",url,handler);
+
+                }
+            }
+        });
+
 
 
     }
@@ -79,9 +103,14 @@ public class BackDoorActivity extends BaseActivity {
         lv = findViewById(R.id.back_lv);//注意，lv外面一定不要嵌套scrollview
         btn_get = findViewById(R.id.back_btn_get);
         btn_deleteAll = findViewById(R.id.back_btn_deleteall);
+
         btn_commitChoujiang = findViewById(R.id.back_btn_commitChoujiang);
         ed_choujiangFail = findViewById(R.id.back_ed_weichoudao);
         ed_choujiang = findViewById(R.id.back_ed_setchoudao);
+
+        ed_setanhao = findViewById(R.id.back_ed_setanhao);
+        ed_setanhaocontent = findViewById(R.id.back_ed_setanhaocontent);
+        btn_sendanhao = findViewById(R.id.back_btn_sendanhao);
     }
     public void getServerMessage(){//获取服务器信息并在成功后handler会重新初始化lv并刷新
         //180.76.185.86
@@ -113,6 +142,8 @@ public class BackDoorActivity extends BaseActivity {
     public static final int Delete_FAILED = 7;
     public static final int SET_CHOUJIANG_SUCCESS = 10;
     public static final int SET_CHOUJIANG_FAILED = 11;
+    public static final int SENDANHAO_SUCCESS = 12;
+    public static final int SENDANHAO_FAILED = 13;
     protected Handler handler=new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -146,6 +177,14 @@ public class BackDoorActivity extends BaseActivity {
                 case SET_CHOUJIANG_FAILED:
                     Toast.makeText(BackDoorActivity.this,
                             "设置抽奖失败",Toast.LENGTH_SHORT).show();
+                    break;
+                case SENDANHAO_SUCCESS:
+                    Toast.makeText(BackDoorActivity.this,
+                            "设置暗号成功",Toast.LENGTH_SHORT).show();
+                    break;
+                case SENDANHAO_FAILED:
+                    Toast.makeText(BackDoorActivity.this,
+                            "设置暗号失败",Toast.LENGTH_SHORT).show();
                     break;
             }
 

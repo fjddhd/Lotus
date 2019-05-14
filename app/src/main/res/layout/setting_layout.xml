@@ -32,10 +32,34 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:background="@drawable/bt_shape"
             android:padding="5dp"
             android:id="@+id/setting_btn"
             android:text="保存"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/bt_shape"
+            android:padding="5dp"
+            android:id="@+id/setting_btn1"
+            android:text="106.13.10.170"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bt_shape"
+            android:padding="5dp"
+            android:id="@+id/setting_btn2"
+            android:text="182.61.10.107"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/bt_shape"
+            android:padding="5dp"
+            android:id="@+id/setting_btn3"
+            android:text="180.76.185.86"/>
 
 
     </LinearLayout>
