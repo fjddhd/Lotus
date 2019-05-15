@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.Vibrator;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -156,17 +157,17 @@ public class MainActivity extends BaseActivity {
                     break;
                 case CHECK_AUTH_SUCCESS:
                     String s_check= msg.obj.toString();
-                    System.out.println("抽奖资格：YesOrNo： "+s_check);
-                    if (s_check.equals("no")){
+                    Toast.makeText(MainActivity.this,s_check,Toast.LENGTH_SHORT);
+
+                    if (s_check.equals("没有奖奖抽呢")){
                         Toast.makeText(MainActivity.this,
                                 "现在还不给抽奖呐安安安，快去向现在多多申请嘛",Toast.LENGTH_SHORT).show();
-                    }else if (s_check.equals("yes")){
+                    }else{
                         //允许抽奖，重叠按钮切换为抽奖按钮
                         btn_wantChoujiang.setVisibility(View.GONE);
                         btn_choujiang.setVisibility(View.VISIBLE);
-                    }else {
-                        Toast.makeText(MainActivity.this,
-                                "没有成功获取到抽奖认证信息呢，安安安",Toast.LENGTH_SHORT).show();
+
+                        tv.setText(Html.fromHtml("本次抽奖可以抽到的奖励是： <font color='#ff0000'>"+s_check+"</font>"));
                     }
                     break;
                 case CHECK_AUTH_FAILED:

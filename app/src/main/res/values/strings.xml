@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">未来多多</string>
-    <string name="defaultserver">182.61.10.107</string>
+    <string name="defaultserver">182.61.10.107:8080</string>
     <string name="duoduoma">2015725</string>
 </resources>

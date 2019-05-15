@@ -56,25 +56,25 @@ public class SettingPage extends BaseActivity {
 
 
         //测试网络连通性---2019/5/14
-        final Button btn1=findViewById(R.id.setting_btn1);
+//        final Button btn1=findViewById(R.id.setting_btn1);
         final Button btn2=findViewById(R.id.setting_btn2);
         final Button btn3=findViewById(R.id.setting_btn3);
 
-        btn1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ed1.setText(btn1.getText().toString());
-                //180.76.185.86
-                StringBuilder sb=new StringBuilder();
-                Mysp mysp=new Mysp(SettingPage.this,"connection");
-                sb.append("http://"+btn1.getText().toString()+"/duoduoanan?s1=");//涉及到第一次启动，从String文件中取默认服务器地址
-                sb.append("测试连通性"+"&s2=");
-                sb.append("145");
-                //发送时间--测试用
-                sb.append("&sendTime="+(new Date().toLocaleString()));
-                HttpCon.createPostString("",sb.toString(),new Handler());
-            }
-        });
+//        btn1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                ed1.setText(btn1.getText().toString());
+//                //180.76.185.86
+//                StringBuilder sb=new StringBuilder();
+//                Mysp mysp=new Mysp(SettingPage.this,"connection");
+//                sb.append("http://"+btn1.getText().toString()+"/duoduoanan?s1=");//涉及到第一次启动，从String文件中取默认服务器地址
+//                sb.append("测试连通性"+"&s2=");
+//                sb.append("145");
+//                //发送时间--测试用
+//                sb.append("&sendTime="+(new Date().toLocaleString()));
+//                HttpCon.createPostString("",sb.toString(),new Handler());
+//            }
+//        });
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
