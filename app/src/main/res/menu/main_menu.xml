@@ -6,4 +6,7 @@
     <item android:title="多多专用页面"
         android:id="@+id/menu_back"
         />
+    <item android:title="十连抽"
+        android:id="@+id/menu_tenchou"
+        />
 </menu>
