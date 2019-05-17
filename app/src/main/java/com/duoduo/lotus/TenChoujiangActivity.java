@@ -1,8 +1,11 @@
 package com.duoduo.lotus;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.Html;
+import android.text.SpannableString;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +31,7 @@ public class TenChoujiangActivity extends BaseActivity {
         setContentView(R.layout.tenchoujiang_layout);
         InitToolbar(R.id.tool_bar_tenchou,"超级刚需十连抽",true);
         FVBid();
-        final ArrayList<String> jiangchi=createJiangChi(10,10,0);
+        final ArrayList<String> jiangchi=createJiangChi(2,10,0);
         btn_chou.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -49,15 +52,35 @@ public class TenChoujiangActivity extends BaseActivity {
     public void initialLV(String[] ss){
         ArrayAdapter<String> adapter=new ArrayAdapter<String>(
                 TenChoujiangActivity.this,android.R.layout.simple_list_item_1, ss){
+            @SuppressLint("ResourceAsColor")
             @NonNull
             @Override
             public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {//让内部tv文本居中
                 TextView textView = (TextView) super.getView(position, convertView, parent);
                 textView.setGravity(Gravity.CENTER);
+                String s=textView.getText().toString();
+                int i;
+                for (i=0;s.charAt(i)=='★';++i){
+                    //计数★数量保存到i
+                }
+
+                System.out.println(textView.getText()+"   "+i);
+                textView.setTextColor(textView.getContext().getColor(R.color.black));//坑：不加这个的话每次第一个item会继承上一组listview
+                if (i==4){
+                    textView.setTextColor(textView.getContext().getColor(R.color.fourstar));//坑：不能直接写R.color
+                }else if (i==5){
+                    textView.setTextColor(textView.getContext().getColor(R.color.fivestar));
+                }else if (i==3){
+                    textView.setTextColor(textView.getContext().getColor(R.color.threestar));
+                }
                 return textView;
             }
         };
         ten_lv.setAdapter(adapter);//填充lv
+
+        //填充后动态修改颜色
+
+
         ten_lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {

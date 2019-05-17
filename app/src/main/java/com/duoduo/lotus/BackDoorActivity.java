@@ -158,7 +158,7 @@ public class BackDoorActivity extends BaseActivity {
                     break;
                 case GET_FAILED:
                     Toast.makeText(BackDoorActivity.this,
-                            "没成功获取到呢，也许网络连接出了问题",Toast.LENGTH_SHORT).show();
+                            getString(R.string.connectfailed),Toast.LENGTH_SHORT).show();
                     break;
                 case Delete_FAILED:
                     Toast.makeText(BackDoorActivity.this,

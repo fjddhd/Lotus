@@ -46,6 +46,7 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         InitToolbar(R.id.tool_bar_main, "安安的未来多多", false);
         confXinGe();//配置信鸽推送
+        sendOpenMessage();//向服务器发送设备号和app时间
 
         FVBid();
         knockBackdoor = 0;
@@ -132,6 +133,26 @@ public class MainActivity extends BaseActivity {
         knockBackdoor = 0;//重置后门
     }
 
+    /**
+     * 获取系统时间和设备号并发送，在每次开启主活动的时候发送
+     * SENDSERIALTIME_SUCCEED,SENDSERIALTIME_FAILED在app端暂不需要处理
+     * */
+    public static final int SENDSERIALTIME_SUCCEED = 0;
+    public static final int SENDSERIALTIME_FAILED = 1;
+    public void sendOpenMessage(){
+        StringBuilder sb=new StringBuilder();
+        Mysp mysp = new Mysp(MainActivity.this, "connection");
+        sb.append("http://" + mysp.getString("server",
+                getString(R.string.defaultserver)) + "/serialnumber?serial=");
+        sb.append(getSerialNumber());
+        sb.append("   发送时间为=== ");
+        sb.append(getCurrenttime());
+        String url=sb.toString();
+        HttpCon.SendMessageMethodGet("",url,handler,SENDSERIALTIME_SUCCEED,SENDSERIALTIME_FAILED,
+        "发送设备号和手机时间成功","发送设备号和手机时间失败");
+    }
+
+
     public static final int PUSH_SUCCEED = 2;
     public static final int PUSH_FAILED = 3;
     public static final int CHECK_AUTH_SUCCESS = 8;
@@ -148,7 +169,7 @@ public class MainActivity extends BaseActivity {
                     String s = msg.obj.toString();
                     if (s.length() > 100) {//返回值长度大于100也表示没成功
                         Toast.makeText(MainActivity.this,
-                                "未来多多现在不在呐，安安安", Toast.LENGTH_SHORT).show();
+                                getString(R.string.connectfailed), Toast.LENGTH_SHORT).show();
                         break;
                     }
                     if (s.equals("哎，暗号号！震动一下惩罚安安安")) {
@@ -159,7 +180,7 @@ public class MainActivity extends BaseActivity {
                     break;
                 case PUSH_FAILED:
                     Toast.makeText(MainActivity.this,
-                            "未来多多现在不在呐，安安安", Toast.LENGTH_SHORT).show();
+                            getString(R.string.connectfailed), Toast.LENGTH_SHORT).show();
                     break;
                 case CHECK_AUTH_SUCCESS:
                     String s_check = msg.obj.toString();
@@ -178,7 +199,7 @@ public class MainActivity extends BaseActivity {
                     break;
                 case CHECK_AUTH_FAILED:
                     Toast.makeText(MainActivity.this,
-                            "未来多多现在不在呐，安安安", Toast.LENGTH_SHORT).show();
+                            getString(R.string.connectfailed), Toast.LENGTH_SHORT).show();
                     break;
                 case CHOUJIANG_SUCCESS:
                     tv.setText("抽奖结果是： " + msg.obj.toString() + "  截图给多多才有效哦安安安~");
@@ -188,7 +209,7 @@ public class MainActivity extends BaseActivity {
                     break;
                 case CHOUJIANG_FAILED:
                     Toast.makeText(MainActivity.this,
-                            "未来多多现在不在呐，安安安", Toast.LENGTH_SHORT).show();
+                            getString(R.string.connectfailed), Toast.LENGTH_SHORT).show();
                     break;
 
             }

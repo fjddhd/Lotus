@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import java.util.Date;
+
 public class BaseActivity extends AppCompatActivity {
     private Toolbar mToolbar;
     @Override
@@ -29,5 +31,13 @@ public class BaseActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+    //获取系统时间
+    public String getCurrenttime(){
+        return (new Date().toLocaleString());
+    }
+    public String getSerialNumber(){
+        String SerialNumber = android.os.Build.SERIAL;
+        return SerialNumber;
     }
 }
