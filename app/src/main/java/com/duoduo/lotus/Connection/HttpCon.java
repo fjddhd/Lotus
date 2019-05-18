@@ -18,6 +18,8 @@ import okhttp3.Response;
 import static android.content.ContentValues.TAG;
 
 public class HttpCon {
+    public static final int SENDSERIALTIME_SUCCEED = 0;
+    public static final int SENDSERIALTIME_FAILED = 1;
     public static final int PUSH_SUCCEED = 2;
     public static final int PUSH_FAILED = 3;
     public static final int GET_SUCCEED = 4;
@@ -30,8 +32,12 @@ public class HttpCon {
     public static final int SET_CHOUJIANG_FAILED = 11;
     public static final int CHOUJIANG_SUCCESS = 12;
     public static final int CHOUJIANG_FAILED = 13;
-    public static final int SENDANHAO_SUCCESS = 12;
-    public static final int SENDANHAO_FAILED = 13;
+    public static final int SENDANHAO_SUCCESS = 14;
+    public static final int SENDANHAO_FAILED = 15;
+    public static final int SETSTATUS_SUCCESS = 16;
+    public static final int SETSTATUS_FAILED = 17;
+    public static final int GETSTATUS_SUCCESS = 18;
+    public static final int GETSTATUS_FAILED = 19;
     public static void SendMessageMethodGet(String requestBody, String url, final Handler handler
     , final int SuccessMessage, final int FaliedMessage, final String successLog, final String FailedLog){
         //可以在形参中输入成功失败发送的message和安卓手机打印消息

@@ -7,4 +7,13 @@
     <color name="fourstar">#ba001c</color>
     <color name="fivestar">#c902c9</color>
     <color name="black">#000</color>
+    <color name="gray">#646464</color>
+
+    <color name="statusBG">#00c0ca</color>
+    <color name="statusGreat">#aa009405</color>
+    <color name="statusWell">#aa50c900</color>
+    <color name="statusNormal">#aacac402</color>
+    <color name="statusBad">#aadf0505</color>
+
+    <color name="linearlayoutboard">#da9500</color>
 </resources>

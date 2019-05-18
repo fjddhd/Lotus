@@ -27,6 +27,11 @@ public class BackDoorActivity extends BaseActivity {
     private EditText ed_setanhao;
     private EditText ed_setanhaocontent;
     private Button btn_sendanhao;
+    private EditText ed_desc;
+    private EditText ed_mind;
+    private EditText ed_hara;
+    private EditText ed_nemuru;
+    private Button btn_sendStatus;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -96,6 +101,22 @@ public class BackDoorActivity extends BaseActivity {
             }
         });
 
+        //发送状态
+        btn_sendStatus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Mysp sp=new Mysp(BackDoorActivity.this,"connection");
+                String url="http://"+sp.getString("server",
+                        view.getContext().getString(R.string.defaultserver))+
+                        "/setstatus?desc="+ed_desc.getText().toString()
+                        +"&mind="+ed_mind.getText().toString()+
+                        "&hara="+ed_hara.getText().toString()+
+                        "&nemuru="+ed_nemuru.getText().toString();
+                HttpCon.SendMessageMethodGet("",url,handler,SETSTATUS_SUCCESS,SETSTATUS_FAILED
+                ,"设置状态成功","设置状态失败");
+            }
+        });
+
 
 
     }
@@ -111,6 +132,12 @@ public class BackDoorActivity extends BaseActivity {
         ed_setanhao = findViewById(R.id.back_ed_setanhao);
         ed_setanhaocontent = findViewById(R.id.back_ed_setanhaocontent);
         btn_sendanhao = findViewById(R.id.back_btn_sendanhao);
+
+        ed_desc = findViewById(R.id.back_ed_setstatusdesc);
+        ed_mind = findViewById(R.id.back_ed_setmind);
+        ed_hara = findViewById(R.id.back_ed_sethara);
+        ed_nemuru = findViewById(R.id.back_ed_setnemuru);
+        btn_sendStatus = findViewById(R.id.back_btn_sendstatus);
     }
     public void getServerMessage(){//获取服务器信息并在成功后handler会重新初始化lv并刷新
         //180.76.185.86
@@ -142,8 +169,10 @@ public class BackDoorActivity extends BaseActivity {
     public static final int Delete_FAILED = 7;
     public static final int SET_CHOUJIANG_SUCCESS = 10;
     public static final int SET_CHOUJIANG_FAILED = 11;
-    public static final int SENDANHAO_SUCCESS = 12;
-    public static final int SENDANHAO_FAILED = 13;
+    public static final int SENDANHAO_SUCCESS = 14;
+    public static final int SENDANHAO_FAILED = 15;
+    public static final int SETSTATUS_SUCCESS = 16;
+    public static final int SETSTATUS_FAILED = 17;
     protected Handler handler=new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -185,6 +214,14 @@ public class BackDoorActivity extends BaseActivity {
                 case SENDANHAO_FAILED:
                     Toast.makeText(BackDoorActivity.this,
                             "设置暗号失败",Toast.LENGTH_SHORT).show();
+                    break;
+                case SETSTATUS_SUCCESS:
+                    Toast.makeText(BackDoorActivity.this,
+                            "设置状态成功",Toast.LENGTH_SHORT).show();
+                    break;
+                case SETSTATUS_FAILED:
+                    Toast.makeText(BackDoorActivity.this,
+                            "设置状态失败",Toast.LENGTH_SHORT).show();
                     break;
             }
 

@@ -73,4 +73,6 @@ dependencies {
  */
     implementation 'com.tencent.xinge:mipush:4.3.2-xiaomi-release'
 
+    implementation 'me.zhouzhuo.zzhorizontalprogressbar:zz-horizontal-progressbar:1.1.0'
+
 }

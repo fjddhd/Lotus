@@ -23,6 +23,7 @@
         <activity android:name=".SettingPage"/>
         <activity android:name=".SecurityPage"/>
         <activity android:name=".TenChoujiangActivity"/>
+        <activity android:name=".StatusActivity"/>
     </application>
 
 </manifest>

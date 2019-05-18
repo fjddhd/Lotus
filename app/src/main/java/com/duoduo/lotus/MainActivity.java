@@ -265,6 +265,10 @@ public class MainActivity extends BaseActivity {
                 Intent k = new Intent(MainActivity.this,TenChoujiangActivity.class);
                 startActivity(k);
                 break;
+            case R.id.menu_status:
+                Intent m = new Intent(MainActivity.this,StatusActivity.class);
+                startActivity(m);
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
