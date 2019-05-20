@@ -38,6 +38,10 @@ public class HttpCon {
     public static final int SETSTATUS_FAILED = 17;
     public static final int GETSTATUS_SUCCESS = 18;
     public static final int GETSTATUS_FAILED = 19;
+    public static final int SETSTATUS_SUCCESS_ANAN = 20;
+    public static final int SETSTATUS_FAILED_ANAN = 21;
+    public static final int GETSTATUS_SUCCESS_ANAN = 22;
+    public static final int GETSTATUS_FAILED_ANAN = 23;
     public static void SendMessageMethodGet(String requestBody, String url, final Handler handler
     , final int SuccessMessage, final int FaliedMessage, final String successLog, final String FailedLog){
         //可以在形参中输入成功失败发送的message和安卓手机打印消息

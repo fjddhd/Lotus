@@ -3,13 +3,16 @@
     <item android:title="设置"
         android:id="@+id/menu_setting"
         />
-    <item android:title="多多专用页面"
-        android:id="@+id/menu_back"
-        />
     <item android:title="十连抽"
         android:id="@+id/menu_tenchou"
         />
-    <item android:title="多多状态"
+    <item android:title="多多专用页面"
+        android:id="@+id/menu_back"
+        />
+    <item android:title="多多安安状态"
         android:id="@+id/menu_status"
+        />
+    <item android:title="安安设置页面"
+        android:id="@+id/menu_back_anan"
         />
 </menu>

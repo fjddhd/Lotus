@@ -9,7 +9,8 @@
     <color name="black">#000</color>
     <color name="gray">#646464</color>
 
-    <color name="statusBG">#00c0ca</color>
+    <!--#00c0ca-->
+    <color name="statusBG">#fff</color>
     <color name="statusGreat">#aa009405</color>
     <color name="statusWell">#aa50c900</color>
     <color name="statusNormal">#aacac402</color>

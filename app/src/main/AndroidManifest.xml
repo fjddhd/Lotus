@@ -24,6 +24,7 @@
         <activity android:name=".SecurityPage"/>
         <activity android:name=".TenChoujiangActivity"/>
         <activity android:name=".StatusActivity"/>
+        <activity android:name=".AnanBackDoorActivity"/>
     </application>
 
 </manifest>

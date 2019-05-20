@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical"
+        >
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/tool_bar_back4anan"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            >
+        </android.support.v7.widget.Toolbar>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        >
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:layout_marginTop="5dp"-->
+            <!--android:gravity="center">-->
+            <!--<EditText-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:hint="暗号"-->
+                <!--android:maxLines="1"-->
+                <!--android:maxLength="8"-->
+                <!--android:inputType="text"-->
+                <!--android:id="@+id/back_ed_setanhao_anan"-->
+                <!--/>-->
+            <!--<EditText-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:hint="设置暗号内容"-->
+                <!--android:inputType="textMultiLine"-->
+                <!--android:gravity="top"-->
+                <!--android:maxLength="99"-->
+                <!--android:id="@+id/back_ed_setanhaocontent_anan"-->
+                <!--/>-->
+            <!--<Button-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="设置暗号"-->
+                <!--android:padding="5dp"-->
+                <!--android:background="@drawable/bt_shape"-->
+                <!--android:id="@+id/back_btn_sendanhao_anan"-->
+                <!--/>-->
+
+        <!--</LinearLayout>-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/linear_topborad_shape"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:padding="5dp"
+            android:gravity="center">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="设置状态描述"
+                android:maxLines="1"
+                android:textAlignment="center"
+                android:inputType="text"
+                android:id="@+id/back_ed_setstatusdesc_anan"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/linear_bottomborad_shape"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:padding="5dp"
+            android:gravity="center">
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="设置mind"
+                android:inputType="number"
+                android:gravity="top"
+                android:maxLength="3"
+                android:id="@+id/back_ed_setmind_anan"
+                />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="设置hara"
+                android:inputType="number"
+                android:gravity="top"
+                android:maxLength="3"
+                android:id="@+id/back_ed_sethara_anan"
+                />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="设置nemuru"
+                android:inputType="number"
+                android:gravity="top"
+                android:maxLength="3"
+                android:id="@+id/back_ed_setnemuru_anan"
+                />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="设置状态"
+                android:padding="5dp"
+                android:background="@drawable/bt_shape"
+                android:id="@+id/back_btn_sendstatus_anan"
+                />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

@@ -17,89 +17,196 @@
             >
         </android.support.v7.widget.Toolbar>
     </LinearLayout>
-    <LinearLayout
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:gravity="center"
-        android:orientation="vertical">
-        <TextView
+        android:layout_height="match_parent">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="textStart"
-            android:layout_margin="5dp"
-            android:text="心情指数（越高越好哦）" />
-        <me.zhouzhuo.zzhorizontalprogressbar.ZzHorizontalProgressBar
-            android:id="@+id/status_pb_mind"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_margin="5dp"
-            app:zpb_padding="0dp"
-            app:zpb_pb_color="@color/statusGreat"
-            app:zpb_bg_color="@color/statusBG"
-            app:zpb_show_mode="round_rect"
-            app:zpb_max="100"
-            app:zpb_progress="95"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="textStart"
-            android:layout_margin="5dp"
-            android:text="饥饿指数（越高越饿哦）" />
-        <me.zhouzhuo.zzhorizontalprogressbar.ZzHorizontalProgressBar
-            android:id="@+id/status_pb_hara"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_margin="5dp"
-            app:zpb_padding="0dp"
-            app:zpb_pb_color="@color/statusGreat"
-            app:zpb_bg_color="@color/statusBG"
-            app:zpb_show_mode="round_rect"
-            app:zpb_max="100"
-            app:zpb_progress="95"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="textStart"
-            android:layout_margin="5dp"
-            android:text="困困指数（越低越困哦）" />
-        <me.zhouzhuo.zzhorizontalprogressbar.ZzHorizontalProgressBar
-            android:id="@+id/status_pb_nemuru"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_margin="5dp"
-            app:zpb_padding="0dp"
-            app:zpb_pb_color="@color/statusGreat"
-            app:zpb_bg_color="@color/statusBG"
-            app:zpb_show_mode="round_rect"
-            app:zpb_max="100"
-            app:zpb_progress="30"
-            />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:padding="3dp"
-            android:background="@drawable/bt_shape"
-            android:text="获取多多状态"
-            android:textColor="#fff"
-            android:id="@+id/status_btn_getstatus"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:id="@+id/status_tv_describetion"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:id="@+id/status_tv_statuschangetime"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="textStart"
+                    android:layout_margin="5dp"
+                    android:text="心情指数（越高越好哦）" />
+
+                <me.zhouzhuo.zzhorizontalprogressbar.ZzHorizontalProgressBar
+                    android:id="@+id/status_pb_mind"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_margin="5dp"
+                    app:zpb_padding="0dp"
+                    app:zpb_pb_color="@color/statusGreat"
+                    app:zpb_bg_color="@color/statusBG"
+                    app:zpb_show_mode="round_rect"
+                    app:zpb_max="100"
+                    app:zpb_progress="95" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="textStart"
+                    android:layout_margin="5dp"
+                    android:text="饱饱指数（越高越饱哦）" />
+
+                <me.zhouzhuo.zzhorizontalprogressbar.ZzHorizontalProgressBar
+                    android:id="@+id/status_pb_hara"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_margin="5dp"
+                    app:zpb_padding="0dp"
+                    app:zpb_pb_color="@color/statusGreat"
+                    app:zpb_bg_color="@color/statusBG"
+                    app:zpb_show_mode="round_rect"
+                    app:zpb_max="100"
+                    app:zpb_progress="95" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="textStart"
+                    android:layout_margin="5dp"
+                    android:text="困困指数（越低越困哦）" />
+
+                <me.zhouzhuo.zzhorizontalprogressbar.ZzHorizontalProgressBar
+                    android:id="@+id/status_pb_nemuru"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_margin="5dp"
+                    app:zpb_padding="0dp"
+                    app:zpb_pb_color="@color/statusGreat"
+                    app:zpb_bg_color="@color/statusBG"
+                    app:zpb_show_mode="round_rect"
+                    app:zpb_max="100"
+                    app:zpb_progress="30" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:padding="3dp"
+                    android:background="@drawable/bt_shape"
+                    android:text="获取多多状态"
+                    android:textColor="#fff"
+                    android:id="@+id/status_btn_getstatus" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:id="@+id/status_tv_describetion" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:id="@+id/status_tv_statuschangetime" />
 
 
+            </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical">
 
-    </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="textStart"
+                    android:layout_margin="5dp"
+                    android:text="安安心情指数（越高越好哦）" />
+
+                <me.zhouzhuo.zzhorizontalprogressbar.ZzHorizontalProgressBar
+                    android:id="@+id/status_pb_mind_anan"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_margin="5dp"
+                    app:zpb_padding="0dp"
+                    app:zpb_pb_color="@color/statusGreat"
+                    app:zpb_bg_color="@color/statusBG"
+                    app:zpb_show_mode="round_rect"
+                    app:zpb_max="100"
+                    app:zpb_progress="95" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="textStart"
+                    android:layout_margin="5dp"
+                    android:text="安安饱饱指数（越高越饱哦）" />
+
+                <me.zhouzhuo.zzhorizontalprogressbar.ZzHorizontalProgressBar
+                    android:id="@+id/status_pb_hara_anan"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_margin="5dp"
+                    app:zpb_padding="0dp"
+                    app:zpb_pb_color="@color/statusGreat"
+                    app:zpb_bg_color="@color/statusBG"
+                    app:zpb_show_mode="round_rect"
+                    app:zpb_max="100"
+                    app:zpb_progress="95" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="textStart"
+                    android:layout_margin="5dp"
+                    android:text="安安困困指数（越低越困哦）" />
+
+                <me.zhouzhuo.zzhorizontalprogressbar.ZzHorizontalProgressBar
+                    android:id="@+id/status_pb_nemuru_anan"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_margin="5dp"
+                    app:zpb_padding="0dp"
+                    app:zpb_pb_color="@color/statusGreat"
+                    app:zpb_bg_color="@color/statusBG"
+                    app:zpb_show_mode="round_rect"
+                    app:zpb_max="100"
+                    app:zpb_progress="30" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:padding="3dp"
+                    android:background="@drawable/bt_shape"
+                    android:text="获取安安状态"
+                    android:textColor="#fff"
+                    android:id="@+id/status_btn_getstatus_anan" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:id="@+id/status_tv_describetion_anan" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:id="@+id/status_tv_statuschangetime_anan" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
 
 </LinearLayout>

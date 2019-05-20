@@ -257,17 +257,21 @@ public class MainActivity extends BaseActivity {
                 Intent i = new Intent(MainActivity.this, SettingPage.class);
                 startActivity(i);
                 break;
-            case R.id.menu_back:
-                Intent j = new Intent(MainActivity.this, SecurityPage.class);
-                startActivity(j);
-                break;
             case R.id.menu_tenchou:
                 Intent k = new Intent(MainActivity.this,TenChoujiangActivity.class);
                 startActivity(k);
                 break;
+            case R.id.menu_back:
+                Intent j = new Intent(MainActivity.this, SecurityPage.class);
+                startActivity(j);
+                break;
             case R.id.menu_status:
                 Intent m = new Intent(MainActivity.this,StatusActivity.class);
                 startActivity(m);
+                break;
+            case R.id.menu_back_anan:
+                Intent l = new Intent(MainActivity.this, AnanBackDoorActivity.class);
+                startActivity(l);
                 break;
         }
         return super.onOptionsItemSelected(item);
