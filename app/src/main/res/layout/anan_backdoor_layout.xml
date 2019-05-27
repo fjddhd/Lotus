@@ -89,7 +89,7 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="设置mind"
+                android:hint="悦否"
                 android:inputType="number"
                 android:gravity="top"
                 android:maxLength="3"
@@ -98,7 +98,7 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="设置hara"
+                android:hint="饿否"
                 android:inputType="number"
                 android:gravity="top"
                 android:maxLength="3"
@@ -107,7 +107,7 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="设置nemuru"
+                android:hint="困否"
                 android:inputType="number"
                 android:gravity="top"
                 android:maxLength="3"
@@ -123,6 +123,15 @@
                 />
 
         </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="上面的三个值的范围是1-100哦"
+            android:textColor="@color/gray"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_margin="5dp"
+            />
     </LinearLayout>
 
 

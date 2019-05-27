@@ -56,7 +56,11 @@ public class BackDoorActivity extends BaseActivity {
                 String url="http://"+sp.getString("server",
                         view.getContext().getString(R.string.defaultserver))+
                         "/duoduoanandeleteall";
-                HttpCon.createDelString("",url,handler);
+//                HttpCon.createDelString("",url,handler);
+
+                //5-27连接重构
+                HttpCon.SendMessageMethodGet("",url,handler, HttpCon.Delete_SUCCEED
+                ,HttpCon.Delete_FAILED,"删除成功","删除失败");
             }
         });
 
@@ -74,8 +78,12 @@ public class BackDoorActivity extends BaseActivity {
                     String url="http://"+sp.getString("server",
                             view.getContext().getString(R.string.defaultserver))+
                             "/duoduoanansetchoujiang?s1="+s1+"&s2="+s2;
-                    HttpCon.createSetChoujiang("",url,handler);
+//                    HttpCon.createSetChoujiang("",url,handler);
 
+                    //5-27连接重构
+                    HttpCon.SendMessageMethodGet("",url,handler,
+                            HttpCon.SET_CHOUJIANG_SUCCESS,HttpCon.SET_CHOUJIANG_FAILED,
+                            "设置抽奖资格成功","设置抽奖资格失败");
                 }
             }
         });
@@ -95,7 +103,13 @@ public class BackDoorActivity extends BaseActivity {
                     String url="http://"+sp.getString("server",
                             view.getContext().getString(R.string.defaultserver))+
                             "/setanhao?anhao="+s1+"&anhaocontent="+s2;
-                    HttpCon.createSendAnhao("",url,handler);
+
+//                    HttpCon.createSendAnhao("",url,handler);
+
+                    //5-27连接重构
+                    HttpCon.SendMessageMethodGet("",url,handler,
+                            HttpCon.SENDANHAO_SUCCESS,HttpCon.SENDANHAO_FAILED,
+                            "设置暗号成功","设置暗号失败");
 
                 }
             }
@@ -144,7 +158,13 @@ public class BackDoorActivity extends BaseActivity {
         StringBuilder sb=new StringBuilder();
         Mysp mysp=new Mysp(BackDoorActivity.this,"connection");
         sb.append("http://"+mysp.getString("server",this.getString(R.string.defaultserver))+"/duoduoananget");
-        HttpCon.createGetString("",sb.toString(),handler);
+
+//        HttpCon.createGetString("",sb.toString(),handler);
+
+        //5-27连接重构
+        HttpCon.SendMessageMethodGet("",sb.toString(),handler,
+                HttpCon.GET_SUCCEED,HttpCon.GET_FAILED,"获取成功","获取失败");
+
     }
     public void initialLV(String[] ss){
         ArrayAdapter<String> adapter=new ArrayAdapter<String>(
@@ -158,7 +178,11 @@ public class BackDoorActivity extends BaseActivity {
                 String url="http://"+sp.getString("server",
                         view.getContext().getString(R.string.defaultserver))+
                         "/duoduoanandeletespecial?s1="+((TextView)view).getText().toString();
-                HttpCon.createDelString("",url,handler);
+//                HttpCon.createDelString("",url,handler);
+
+                //5-27连接重构
+                HttpCon.SendMessageMethodGet("",url,handler,HttpCon.Delete_SUCCEED,
+                        HttpCon.Delete_FAILED,"删除成功","删除失败");
             }
         });
     }

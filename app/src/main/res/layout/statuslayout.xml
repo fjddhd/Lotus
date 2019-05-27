@@ -40,7 +40,7 @@
                     android:layout_height="wrap_content"
                     android:textAlignment="textStart"
                     android:layout_margin="5dp"
-                    android:text="心情指数（越高越好哦）" />
+                    android:text="多多心情指数（越高越好哦）" />
 
                 <me.zhouzhuo.zzhorizontalprogressbar.ZzHorizontalProgressBar
                     android:id="@+id/status_pb_mind"
@@ -59,7 +59,7 @@
                     android:layout_height="wrap_content"
                     android:textAlignment="textStart"
                     android:layout_margin="5dp"
-                    android:text="饱饱指数（越高越饱哦）" />
+                    android:text="多多饱饱指数（越高越饱哦）" />
 
                 <me.zhouzhuo.zzhorizontalprogressbar.ZzHorizontalProgressBar
                     android:id="@+id/status_pb_hara"
@@ -78,7 +78,7 @@
                     android:layout_height="wrap_content"
                     android:textAlignment="textStart"
                     android:layout_margin="5dp"
-                    android:text="困困指数（越低越困哦）" />
+                    android:text="多多困困指数（越低越困哦）" />
 
                 <me.zhouzhuo.zzhorizontalprogressbar.ZzHorizontalProgressBar
                     android:id="@+id/status_pb_nemuru"

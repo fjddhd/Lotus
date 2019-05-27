@@ -18,6 +18,7 @@ import okhttp3.Response;
 import static android.content.ContentValues.TAG;
 
 public class HttpCon {
+    public static OkHttpClient okHttpClient = new OkHttpClient();//为了不多创建线程池和连接池，所以采用okHttpClient单例对象
     public static final int SENDSERIALTIME_SUCCEED = 0;
     public static final int SENDSERIALTIME_FAILED = 1;
     public static final int PUSH_SUCCEED = 2;
@@ -42,10 +43,11 @@ public class HttpCon {
     public static final int SETSTATUS_FAILED_ANAN = 21;
     public static final int GETSTATUS_SUCCESS_ANAN = 22;
     public static final int GETSTATUS_FAILED_ANAN = 23;
+    public static final int SENDXG_SUCCESS = 24;
+    public static final int SENDXG_FAILED = 25;
     public static void SendMessageMethodGet(String requestBody, String url, final Handler handler
     , final int SuccessMessage, final int FaliedMessage, final String successLog, final String FailedLog){
         //可以在形参中输入成功失败发送的message和安卓手机打印消息
-        OkHttpClient okHttpClient = new OkHttpClient();
         final Request request = new Request.Builder()
                 .url(url)
                 .get()//默认就是GET请求，可以不写
@@ -75,6 +77,7 @@ public class HttpCon {
             }
         });
     }
+
 
     public static void createPostString(String requestBody, String url, final Handler handler){//post请求需要requestBody
         OkHttpClient okHttpClient = new OkHttpClient();
@@ -289,6 +292,54 @@ public class HttpCon {
                 Message message = new Message();
                 message.obj=response.body().string();
                 message.what =SENDANHAO_SUCCESS;
+                handler.sendMessage(message);
+            }
+        });
+    }
+
+
+
+
+
+
+    /**
+     * 发送推送用
+     * */
+    public static void SendXGPush(String Body, String url, final Handler handler
+            , final int SuccessMessage, final int FaliedMessage, final String successLog, final String FailedLog,
+                                String headerKey,String headerValue){
+        MediaType mediaType = MediaType.parse("application/json");
+        OkHttpClient okHttpClient = new OkHttpClient();
+        final Request request = new Request.Builder()
+                .url(url)
+                .post(RequestBody.create(mediaType,Body))//默认就是GET请求，可以不写
+                .addHeader(headerKey,headerValue.trim())
+                .build();
+
+        System.out.println("-----------手动信鸽-----------");
+        System.out.println(request.toString());
+
+        Call call = okHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.d(TAG, "onFailure: " + e.getMessage());
+                System.out.println(FailedLog);
+
+                Message message = new Message();
+                message.what =FaliedMessage;
+                handler.sendMessage(message);
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                System.out.println(successLog);
+//                System.out.println(response.body().string());
+
+
+                Message message = new Message();
+                message.obj=response.body().string();
+                message.what =SuccessMessage;
                 handler.sendMessage(message);
             }
         });

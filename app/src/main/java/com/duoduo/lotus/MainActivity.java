@@ -47,6 +47,7 @@ public class MainActivity extends BaseActivity {
         InitToolbar(R.id.tool_bar_main, "安安的未来多多", false);
         confXinGe();//配置信鸽推送
         sendOpenMessage();//向服务器发送设备号和app时间
+//        sendXG("测试app推送内容","标题",handler);
 
         FVBid();
         knockBackdoor = 0;
@@ -68,7 +69,12 @@ public class MainActivity extends BaseActivity {
                 sb.append(s2);
                 //发送时间--测试用
                 sb.append("&sendTime=" + (new Date().toLocaleString()));
-                HttpCon.createPostString("", sb.toString(), handler);
+//                HttpCon.createPostString("", sb.toString(), handler);
+
+                //5-27连接重构
+                HttpCon.SendMessageMethodGet("",sb.toString(),handler,
+                        HttpCon.PUSH_SUCCEED,HttpCon.PUSH_FAILED,"获取未来多多消息成功",
+                        "获取未来多多消息失败");
 
                 System.out.println(getMonyhandDay());
 
@@ -106,7 +112,13 @@ public class MainActivity extends BaseActivity {
                 sb.append("http://" + mysp.getString("server",
                         view.getContext().getString(R.string.defaultserver)) + "/duoduoananwantchoujiang?s1=");
                 sb.append(getMonyhandDay());
-                HttpCon.createChoujiangAuth("", sb.toString(), handler);
+
+//                HttpCon.createChoujiangAuth("", sb.toString(), handler);
+
+                //5-27连接重构
+                HttpCon.SendMessageMethodGet("",sb.toString(),handler,
+                        HttpCon.CHECK_AUTH_SUCCESS, HttpCon.CHECK_AUTH_FAILED,"请求抽奖资格成功",
+                        "请求抽奖资格失败");
             }
         });
 
@@ -119,7 +131,12 @@ public class MainActivity extends BaseActivity {
                 Mysp mysp = new Mysp(MainActivity.this, "connection");
                 sb.append("http://" + mysp.getString("server",
                         view.getContext().getString(R.string.defaultserver)) + "/duoduoananchoujiang");
-                HttpCon.createChoujiang("", sb.toString(), handler);
+
+//                HttpCon.createChoujiang("", sb.toString(), handler);
+                //5-27连接重构
+                HttpCon.SendMessageMethodGet("",sb.toString(),handler,
+                        HttpCon.CHOUJIANG_SUCCESS,HttpCon.CHOUJIANG_FAILED,
+                        "抽奖成功","抽奖失败");
 
             }
         });
@@ -210,6 +227,16 @@ public class MainActivity extends BaseActivity {
                 case CHOUJIANG_FAILED:
                     Toast.makeText(MainActivity.this,
                             getString(R.string.connectfailed), Toast.LENGTH_SHORT).show();
+                    break;
+                case HttpCon.SENDXG_SUCCESS:
+                    String xgsuccess = msg.obj.toString();
+                    Toast.makeText(MainActivity.this,
+                            "推送成功代码： "+xgsuccess, Toast.LENGTH_SHORT).show();
+                    break;
+                case HttpCon.SENDXG_FAILED:
+                    String xgfailed = msg.obj.toString();
+                    Toast.makeText(MainActivity.this,
+                            "推送失败代码： "+xgfailed, Toast.LENGTH_SHORT).show();
                     break;
 
             }

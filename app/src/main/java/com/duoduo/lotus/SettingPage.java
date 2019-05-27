@@ -87,7 +87,13 @@ public class SettingPage extends BaseActivity {
                 sb.append("145");
                 //发送时间--测试用
                 sb.append("&sendTime="+(new Date().toLocaleString()));
-                HttpCon.createPostString("",sb.toString(),new Handler());
+
+//                HttpCon.createPostString("",sb.toString(),new Handler());
+
+                //5-27连接重构
+                HttpCon.SendMessageMethodGet("",sb.toString(),new Handler()
+                ,HttpCon.PUSH_SUCCEED,HttpCon.PUSH_FAILED,"测试连通性成功",
+                        "测试连通性失败");
             }
         });
         btn3.setOnClickListener(new View.OnClickListener() {
@@ -102,7 +108,13 @@ public class SettingPage extends BaseActivity {
                 sb.append("145");
                 //发送时间--测试用
                 sb.append("&sendTime="+(new Date().toLocaleString()));
-                HttpCon.createPostString("",sb.toString(),new Handler());
+
+//                HttpCon.createPostString("",sb.toString(),new Handler());
+
+                //5-27连接重构
+                HttpCon.SendMessageMethodGet("",sb.toString(),new Handler()
+                        ,HttpCon.PUSH_SUCCEED,HttpCon.PUSH_FAILED,"测试连通性成功",
+                        "测试连通性失败");
             }
         });
 

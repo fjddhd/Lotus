@@ -36,7 +36,7 @@ public class StatusActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.statuslayout);
-        InitToolbar(R.id.tool_bar_status,"多多当前状态",true);
+        InitToolbar(R.id.tool_bar_status,"多多安安状态",true);
         FVBid();
 
         btn_getstatus.setOnClickListener(new View.OnClickListener() {
@@ -50,7 +50,7 @@ public class StatusActivity extends BaseActivity {
                 Mysp sp=new Mysp(StatusActivity.this,"connection");
                 String url="http://"+sp.getString("server",
                         view.getContext().getString(R.string.defaultserver))+
-                        "/getstatus";
+                        "/getstatus?serial="+getSerialNumber()+"&time="+getCurrenttime();
                 HttpCon.SendMessageMethodGet("",url,handler,GETSTATUS_SUCCESS,
                         GETSTATUS_FAILED,"获取状态成功",
                         "获取状态失败"
@@ -69,7 +69,7 @@ public class StatusActivity extends BaseActivity {
                 Mysp sp=new Mysp(StatusActivity.this,"connection");
                 String url="http://"+sp.getString("server",
                         view.getContext().getString(R.string.defaultserver))+
-                        "/getstatusanan";
+                        "/getstatusanan?serial="+getSerialNumber()+"&time="+getCurrenttime();
                 HttpCon.SendMessageMethodGet("",url,handler,HttpCon.GETSTATUS_SUCCESS_ANAN,
                         HttpCon.GETSTATUS_FAILED_ANAN,"获取状态成功",
                         "获取状态失败"
