@@ -1,6 +1,7 @@
 package com.duoduo.lotus;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
@@ -11,13 +12,17 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.duoduo.lotus.Connection.HttpCon;
 import com.duoduo.lotus.Utils.Mysp;
+import com.duoduo.lotus.Utils.SoftKeyboardUtil;
 import com.tencent.android.tpush.XGIOperateCallback;
 import com.tencent.android.tpush.XGPushConfig;
 import com.tencent.android.tpush.XGPushManager;
@@ -39,10 +44,15 @@ public class MainActivity extends BaseActivity {
     private Calendar cal;
     private Button btn_choujiang;
     private Button btn_wantChoujiang;
+    private LinearLayout ll;
+    private int ananHoumenCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ananHoumenCount=0;
+        knockBackdoor = 0;
+
         setContentView(R.layout.activity_main);
         InitToolbar(R.id.tool_bar_main, "安安的未来多多", false);
         confXinGe();//配置信鸽推送
@@ -50,7 +60,19 @@ public class MainActivity extends BaseActivity {
 //        sendXG("测试app推送内容","标题",handler);
 
         FVBid();
-        knockBackdoor = 0;
+
+        ll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ananHoumenCount++;
+                System.out.println("安安后门进入操作数字： "+ananHoumenCount);
+                if (ananHoumenCount>=5){
+                    startActivity(new Intent(MainActivity.this,AnanBackDoorActivity.class));
+                }
+            }
+        });
+
+
         OpenBackdoor = false;
 
         btn_wantSend.setOnClickListener(new View.OnClickListener() {
@@ -142,11 +164,21 @@ public class MainActivity extends BaseActivity {
         });
 
     }
+    public void FVBid() {
+        ed = findViewById(R.id.ed_duoduo);
+        ed2 = findViewById(R.id.ed_anan);
+        btn_wantSend = findViewById(R.id.btn_main);
+        tv = findViewById(R.id.tv_main);
+        btn_wantChoujiang = findViewById(R.id.btn_wantchoujiang);
+        btn_choujiang = findViewById(R.id.btn_choujiang);
+        ll = findViewById(R.id.main_layout);
+    }
 
     @Override
     protected void onPause() {
         super.onPause();
         OpenBackdoor = false;
+        ananHoumenCount=0;//重置后门
         knockBackdoor = 0;//重置后门
     }
 
@@ -260,15 +292,6 @@ public class MainActivity extends BaseActivity {
             return false;
         }
         return true;
-    }
-
-    public void FVBid() {
-        ed = findViewById(R.id.ed_duoduo);
-        ed2 = findViewById(R.id.ed_anan);
-        btn_wantSend = findViewById(R.id.btn_main);
-        tv = findViewById(R.id.tv_main);
-        btn_wantChoujiang = findViewById(R.id.btn_wantchoujiang);
-        btn_choujiang = findViewById(R.id.btn_choujiang);
     }
 
     @Override

@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">未来多多</string>
     <string name="defaultserver">182.61.10.107:8080</string>
-    <string name="duoduoma">2015725</string>
+    <string name="duoduoma">99</string>
     <string name="ten_textview_readme">--- 娱乐专用十连抽哦安安安，不限量开启中 ---</string>
     <string name="connectfailed">没成功获取到呢，也许网络连接出了问题</string>
 </resources>

@@ -6,91 +6,94 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
+
         <android.support.v7.widget.Toolbar
             android:id="@+id/tool_bar_main"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            >
-        </android.support.v7.widget.Toolbar>
+            android:layout_height="?attr/actionBarSize"></android.support.v7.widget.Toolbar>
     </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:gravity="center"
-        >
+        android:orientation="vertical"
+        android:id="@+id/main_layout"
+        android:scrollIndicators="bottom">
 
 
         <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="跟未来多多说点东西嘛安安安"
             android:id="@+id/ed_duoduo"
-            android:maxLength="8"
-            android:maxLines="1"
-            android:inputType="text"
-            android:layout_marginBottom="0dp" />
-
-        <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="0dp"
+            android:hint="跟未来多多说点东西嘛安安安"
+            android:inputType="text"
+            android:maxLength="8"
+            android:maxLines="1" />
+
+        <EditText
+            android:id="@+id/ed_anan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="25dp"
             android:hint="选择一个未来多多（1-1024）"
             android:inputType="number"
-            android:id="@+id/ed_anan"
             android:maxLength="4"
-            android:maxLines="1"
-            android:layout_marginTop="0dp"
-            android:layout_marginBottom="25dp" />
+            android:maxLines="1" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <Button
+                android:id="@+id/btn_main"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:background="@drawable/bt_shape"
-                android:text="现在就告诉未来多多"
-                android:textColor="#fff"
                 android:layout_marginRight="5dp"
-                android:id="@+id/btn_main" />
+                android:background="@drawable/bt_shape"
+                android:padding="5dp"
+                android:text="现在就告诉未来多多"
+                android:textColor="#fff" />
+
             <Button
+                android:id="@+id/btn_wantchoujiang"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:padding="5dp"
                 android:background="@drawable/bt_shape"
+                android:padding="5dp"
                 android:text="想抽奖嘛"
-                android:textColor="#fff"
-                android:id="@+id/btn_wantchoujiang" />
+                android:textColor="#fff" />
+
             <Button
+                android:id="@+id/btn_choujiang"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:padding="5dp"
                 android:background="@drawable/bt_shape"
+                android:padding="5dp"
                 android:text="点我抽奖"
-                android:visibility="gone"
                 android:textColor="#ef9494"
-                android:id="@+id/btn_choujiang" />
+                android:visibility="gone" />
         </LinearLayout>
 
 
         <TextView
+            android:id="@+id/tv_main"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:id="@+id/tv_main" />
+            android:layout_margin="20dp" />
     </LinearLayout>
 
 
