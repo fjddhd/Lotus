@@ -23,6 +23,8 @@ import android.widget.Toast;
 import com.duoduo.lotus.Connection.HttpCon;
 import com.duoduo.lotus.Utils.Mysp;
 import com.duoduo.lotus.Utils.SoftKeyboardUtil;
+import com.iflytek.cloud.SpeechError;
+import com.iflytek.cloud.SynthesizerListener;
 import com.tencent.android.tpush.XGIOperateCallback;
 import com.tencent.android.tpush.XGPushConfig;
 import com.tencent.android.tpush.XGPushManager;
@@ -226,6 +228,7 @@ public class MainActivity extends BaseActivity {
                         vibrator.vibrate(3000);
                     }
                     tv.setText(s);
+                    openXCunFeiSpeech(s);
                     break;
                 case PUSH_FAILED:
                     Toast.makeText(MainActivity.this,
